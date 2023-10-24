@@ -22,6 +22,7 @@ Route::get('/', function () {
 Route::get('/',[AssistidaController::class, 'index'])->name('assistida.index');
 Route::get('/cadastro',[AssistidaController::class, 'create'])->name('assistida.create');
 Route::post('/cadastro/novo',[AssistidaController::class, 'store'])->name('assistida.store');
+Route::get('/assistida/{id}',[AssistidaController::class, 'show'])->name('assistida.show');
 
 Route::get('/estatisticas',[ServicoController::class, 'dashboard'])->name('dashboard');
 

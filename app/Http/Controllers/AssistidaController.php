@@ -97,4 +97,14 @@ class AssistidaController extends Controller
         $servico->save();
     return redirect()->route('assistida.index');
     }
+    public function show($id) {
+
+        $assistida = Assistida::findOrFail($id);
+
+        $servicos = DB::table('servicos')->where('assistida_id',$id)->get()->toArray(); 
+
+        $cidades = DB::table('cidades')->get();
+
+    return view('/assistida/info', ['assistida' => $assistida, 'servicos'=> $servicos,'cidades'=>$cidades]);
+    }
 }

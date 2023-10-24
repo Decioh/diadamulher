@@ -39,8 +39,8 @@
                 <td>{{$cidades[$assistida->cidades_id-1]->RA}}</td>
                 <td>@if($assistida->created_at != null){{date('d/m/Y', strtotime($assistida -> updated_at))}} @else - @endif</td>
                 <td>
-                    <a href="#{{--route('assistida.info', $assistida-> id)--}}"class="btn btn-secondary btn-sm"> info </a>
-                    <a href="#{{-- route('agenda.list', $assistida-> id)--}}"class="btn btn-success btn-sm"> Agendar </a>
+                    <a href="{{route('assistida.show', $assistida->id)}}"class="btn btn-secondary btn-sm"> info </a>
+                    <a href="#{{-- route('agenda.list', $assistida-> id)--}}"class="btn btn-success btn-sm"> Atendimento </a>
                 </td>
             </tr>
         </tbody>

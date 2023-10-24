@@ -84,7 +84,7 @@ class ServicoController extends Controller
             $sejus_subav = Servico::whereYear('updated_at',$ano)->whereMonth('updated_at', $mes_filter)->where('sejus_subav', '=', '1')->count();
             $delegacia_da_mulher = Servico::whereYear('updated_at',$ano)->whereMonth('updated_at', $mes_filter)->where('delegacia_da_mulher', '=', '1')->count();
             $fiocruz = Servico::whereYear('updated_at',$ano)->whereMonth('updated_at', $mes_filter)->where('fiocruz', '=', '1')->count();
-            $sedet = Servico::whereYear('updated_at',$ano)->whereMonth('updated_at', $mes_filter)->where('sedet', '=', '1')->count();
+            $sedet = Servico::whereYear('updated_at',$ano)->whereMonth('updated_at', $mes_filter)                                       ->where('sedet', '=', '1')->count();
         }
         else{/*Sem filtros*/
             $defensoria = Servico::whereYear('updated_at',$ano)->where('defensoria', '=', '1')->count();

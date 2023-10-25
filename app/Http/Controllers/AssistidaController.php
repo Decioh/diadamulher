@@ -101,10 +101,68 @@ class AssistidaController extends Controller
 
         $assistida = Assistida::findOrFail($id);
 
-        $servicos = DB::table('servicos')->where('assistida_id',$id)->get()->toArray(); 
+        $servicos = DB::table('servicos')->where('assistida_id',$id)->get(); 
+
+        $defensoria = Servico::where('assistida_id',$id)->where('defensoria', '=', '1')->get('defensoria');
+        $cras = Servico::where('assistida_id',$id)->where('cras', '=', '1')->get('cras');
+        $codhab = Servico::where('assistida_id',$id)->where('codhab', '=', '1')->get('codhab');
+        $senac = Servico::where('assistida_id',$id)->where('senac', '=', '1')->get('senac');
+        $sesc_consulta = Servico::where('assistida_id',$id)->where('sesc_consulta', '=', '1')->get('sesc_consulta');
+        $sesc_sens = Servico::where('assistida_id',$id)->where('sesc_sens', '=', '1')->get('sesc_sens');
+        $sesc_mamografia = Servico::where('assistida_id',$id)->where('sesc_mamografia', '=', '1')->get('sesc_mamografia');
+        $sesc_odonto = Servico::where('assistida_id',$id)->where('sesc_odonto', '=', '1')->get('sesc_odonto');
+        $sesc_insercao_diu = Servico::where('assistida_id',$id)->where('sesc_insercao_diu', '=', '1')->get('sesc_insercao_diu');
+        $sesc_citopatologico = Servico::where('assistida_id',$id)->where('sesc_citopatologico', '=', '1')->get('sesc_citopatologico');
+        $sesc_enfermagem = Servico::where('assistida_id',$id)->where('sesc_enfermagem', '=', '1')->get('sesc_enfermagem');
+        $secretaria_da_mulher = Servico::where('assistida_id',$id)->where('secretaria_da_mulher', '=', '1')->get('secretaria_da_mulher');
+        $sec_saude = Servico::where('assistida_id',$id)->where('sec_saude', '=', '1')->get('sec_saude');
+        $sejus_subav = Servico::where('assistida_id',$id)->where('sejus_subav', '=', '1')->get('sejus_subav');
+        $delegacia_da_mulher = Servico::where('assistida_id',$id)->where('delegacia_da_mulher', '=', '1')->get('delegacia_da_mulher');
+        $fiocruz = Servico::where('assistida_id',$id)->where('fiocruz', '=', '1')->get('fiocruz');
+        $sedet = Servico::where('assistida_id',$id)->where('sedet', '=', '1')->get('sedet');
+        $services=null;
+        $services = (array)$services;
+        
+        if(isset($defensoria[0]))
+            array_push($services, $defensoria);
+        if(isset($cras[0]))
+            array_push($services, $cras);
+        if(isset($codhab[0]))
+            array_push($services, $codhab);
+        if(isset($senac[0]))
+            array_push($services, $senac);
+        if(isset($sesc_consulta[0]))
+            array_push($services, $sesc_consulta);
+        if(isset($sesc_sens[0]))
+            array_push($services, $sesc_sens);
+        if(isset($sesc_mamografia[0]))
+            array_push($services, $sesc_mamografia);
+        if(isset($sesc_odonto[0]))
+            array_push($services, $sesc_odonto);
+        if(isset($sesc_insercao_diu[0]))
+            array_push($services, $sesc_insercao_diu);
+        if(isset($sesc_citopatologico[0]))
+            array_push($services, $sesc_citopatologico);
+        if(isset($sesc_enfermagem[0]))
+            array_push($services, $sesc_enfermagem);
+        if(isset($secretaria_da_mulher[0]))
+            array_push($services, $secretaria_da_mulher);
+        if(isset($sec_saude[0]))
+            array_push($services, $sec_saude);
+        if(isset($sejus_subav[0]))
+            array_push($services, $sejus_subav);
+        if(isset($delegacia_da_mulher[0]))
+            array_push($services, $delegacia_da_mulher);
+        if(isset($fiocruz[0]))
+            array_push($services, $fiocruz);
+        if(isset($sedet[0]))
+            array_push($services, $sedet);
+            
+
+
 
         $cidades = DB::table('cidades')->get();
 
-    return view('/assistida/info', ['assistida' => $assistida, 'servicos'=> $servicos,'cidades'=>$cidades]);
+    return view('/assistida/info', ['assistida' => $assistida, 'servicos'=> $servicos,'cidades'=>$cidades, 'services'=>$services]);
     }
 }

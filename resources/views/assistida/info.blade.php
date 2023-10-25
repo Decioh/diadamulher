@@ -7,6 +7,7 @@
 
 @php
 $tel = preg_replace("/(\d{0})(\d{2})(\d{5})(\d{4})/", "\$1(\$2)\$3-\$4", $assistida->tel);
+$i=0;
 @endphp
 
 <h3 class="mt-3">Informações assistida</h3>
@@ -17,7 +18,10 @@ $tel = preg_replace("/(\d{0})(\d{2})(\d{5})(\d{4})/", "\$1(\$2)\$3-\$4", $assist
     <b>Cadastrada em:</b> {{date('d/m/Y', strtotime($assistida->created_at))}}<br>
     <b>E-mail:</b> {{$assistida->email}}<br>
     <b>Telefone:</b> {{$tel}}<br>
-    <a href="#"class="btn btn-warning btn my-5"> Editar </a>
+    <!--a href="#"class="btn btn-warning btn my-5"> Editar </a-->
+    <button type="button" class="btn btn-warning btn my-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Editar
+    </button>
 </p>
 
 
@@ -31,26 +35,13 @@ $tel = preg_replace("/(\d{0})(\d{2})(\d{5})(\d{4})/", "\$1(\$2)\$3-\$4", $assist
           <h5 class="card-title">{{date('d/m/y', strtotime($servico->created_at))}}</h5>
           <h6 class="card-subtitle mb-2 text-muted">{{date('H:i', strtotime($servico->created_at))}}</h6>
           <p class="card-text">Informações do agendamento:<br> </p>
-
-            <b>servicos prestados:</b><br>
-            <p>defensoria: @if($servico->defensoria==1) <ion-icon name="done-all"></ion-icon> @else <ion-icon name="close"></ion-icon> @endif </p>
-            <p>Cras: @if($servico->cras==1) <ion-icon name="done-all"></ion-icon> @else <ion-icon name="close"></ion-icon> @endif </p>
-            <p>Codhab: @if($servico->codhab==1) <ion-icon name="done-all"></ion-icon> @else <ion-icon name="close"></ion-icon> @endif </p>
-            <p>Senac: @if($servico->senac==1) <ion-icon name="done-all"></ion-icon> @else <ion-icon name="close"></ion-icon> @endif </p>
-            <p>Sesc_Consulta: @if($servico->sesc_consulta==1) <ion-icon name="done-all"></ion-icon> @else <ion-icon name="close"></ion-icon> @endif </p>
-            <p>Sesc_Sens: @if($servico->sesc_sens==1) <ion-icon name="done-all"></ion-icon> @else <ion-icon name="close"></ion-icon> @endif </p>
-            <p>Sesc_Odonto: @if($servico->sesc_odonto==1) <ion-icon name="done-all"></ion-icon> @else <ion-icon name="close"></ion-icon> @endif </p>
-            <p>Sesc_insercao_diu: @if($servico->sesc_insercao_diu==1) <ion-icon name="done-all"></ion-icon> @else <ion-icon name="close"></ion-icon> @endif </p>
-            <p>sesc_citopatologico: @if($servico->sesc_citopatologico==1) <ion-icon name="done-all"></ion-icon> @else <ion-icon name="close"></ion-icon> @endif </p>
-            <p>sesc_enfermagem: @if($servico->sesc_enfermagem==1) <ion-icon name="done-all"></ion-icon> @else <ion-icon name="close"></ion-icon> @endif </p>
-            <p>sesc_mamografia: @if($servico->sesc_mamografia==1) <ion-icon name="done-all"></ion-icon> @else <ion-icon name="close"></ion-icon> @endif </p>
-            <p>sedet: @if($servico->sedet==1) <ion-icon name="done-all"></ion-icon> @else <ion-icon name="close"></ion-icon> @endif </p>
-            <p>secretaria_da_mulher: @if($servico->secretaria_da_mulher==1) <ion-icon name="done-all"></ion-icon> @else <ion-icon name="close"></ion-icon> @endif </p>
-            <p>sec_saude: @if($servico->sec_saude==1) <ion-icon name="done-all"></ion-icon> @else <ion-icon name="close"></ion-icon> @endif </p>
-            <p>sejus_subav: @if($servico->sejus_subav==1) <ion-icon name="done-all"></ion-icon> @else <ion-icon name="close"></ion-icon> @endif </p>
-            <p>sesc_enfermagem: @if($servico->sesc_enfermagem==1) <ion-icon name="done-all"></ion-icon> @else <ion-icon name="close"></ion-icon> @endif </p>
-            <p>delegacia_da_mulher: @if($servico->delegacia_da_mulher==1) <ion-icon name="done-all"></ion-icon> @else <ion-icon name="close"></ion-icon> @endif </p>
-            <p>fiocruz: @if($servico->fiocruz==1) <ion-icon name="done-all"></ion-icon> @else <ion-icon name="close"></ion-icon> @endif </p>
+          @php $i=$loop->index @endphp
+            <b>Servicos prestados:</b><br>
+            @foreach($services as $service)
+              @if(isset($service[$i]))
+                <p>{{$service[$i]}}</p>
+              @endif
+            @endforeach
         </div>
       </div>
     </div>
@@ -58,6 +49,24 @@ $tel = preg_replace("/(\d{0})(\d{2})(\d{5})(\d{4})/", "\$1(\$2)\$3-\$4", $assist
     @endforeach
 @else
 <p>Assistida sem agendamentos</p>
-@endif
 
+@endif
+  <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-primary">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>
 @endsection

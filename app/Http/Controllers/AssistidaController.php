@@ -165,4 +165,28 @@ class AssistidaController extends Controller
 
     return view('/assistida/info', ['assistida' => $assistida, 'servicos'=> $servicos,'cidades'=>$cidades, 'services'=>$services]);
     }
+
+/*    public function edit($id){
+
+        $assistida = Assistida::find($id);
+
+    return view ('edit',['assistido'=>$assistido]);
+    }
+*/
+    public function update(Request $req){
+
+        $assistida = Assistida::find($req -> id);
+
+        $assistida->nome       = $req->nome;
+        $assistida->tel        = $req->tel;
+        $assistida->cidades_id = $req->cidade;
+        $assistida->email      = $req->email;
+
+        $assistida->save();
+        $assistidas = Assistida::orderBy('nome', 'asc')->simplePaginate(20);
+
+    //return view('home',['assistidas' => $assistidas])->with('msg', 'Dados Atualizados!');
+    return back();   
+        
+    }
 }

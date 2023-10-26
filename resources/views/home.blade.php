@@ -27,8 +27,7 @@
     </thead>
 @foreach ($assistidas as $assistida)
         @php
-        /*$cpf = preg_replace("/(\d{3})(\d{3})(\d{3})(\d{2})/", "\$1.\$2.\$3-\$4", $assistida -> cpf);*/
-        $tel = preg_replace("/(\d{0})(\d{2})(\d{5})(\d{4})/", "\$1(\$2)\$3-\$4", $assistida -> tel);
+            $tel = preg_replace("/(\d{0})(\d{2})(\d{5})(\d{4})/", "\$1(\$2)\$3-\$4", $assistida -> tel);
         @endphp
         <tbody>
             <tr>
@@ -40,7 +39,7 @@
                 <td>@if($assistida->created_at != null){{date('d/m/Y', strtotime($assistida -> updated_at))}} @else - @endif</td>
                 <td>
                     <a href="{{route('assistida.show', $assistida->id)}}"class="btn btn-secondary btn-sm"> info </a>
-                    <a href="#{{-- route('agenda.list', $assistida-> id)--}}"class="btn btn-success btn-sm"> Atendimento </a>
+                    <a href="{{route('servico.show', $assistida->id)}}"class="btn btn-success btn-sm"> Último Atendimento </a>
                 </td>
             </tr>
         </tbody>

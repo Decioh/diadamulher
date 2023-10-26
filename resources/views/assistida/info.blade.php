@@ -19,9 +19,9 @@ $i=0;
     <b>E-mail:</b> {{$assistida->email}}<br>
     <b>Telefone:</b> {{$tel}}<br>
     <!--a href="#"class="btn btn-warning btn my-5"> Editar </a-->
-    <button type="button" class="btn btn-warning btn my-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <a class="btn btn-warning btn my-5" data-bs-toggle="modal" data-bs-target="#ModalEdit">
       Editar
-    </button>
+    </a>
 </p>
 
 
@@ -51,22 +51,7 @@ $i=0;
 <p>Assistida sem agendamentos</p>
 
 @endif
-  <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-        <button type="button" class="btn btn-primary">Confirmar</button>
-      </div>
-    </div>
-  </div>
-</div>
+
+@include('assistida.modal.edit');
+
 @endsection

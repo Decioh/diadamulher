@@ -114,4 +114,44 @@ class ServicoController extends Controller
     'sesc_mamografia'=>$sesc_mamografia, 'sesc_odonto'=>$sesc_odonto, 'sesc_insercao_diu'=>$sesc_insercao_diu, 'sesc_citopatologico'=>$sesc_citopatologico, 'sesc_enfermagem'=>$sesc_enfermagem, 
     'secretaria_da_mulher'=>$secretaria_da_mulher, 'sec_saude'=>$sec_saude, 'sejus_subav'=>$sejus_subav, 'delegacia_da_mulher'=>$delegacia_da_mulher, 'fiocruz'=>$fiocruz,'sedet'=>$sedet]);
     }
+
+    public function show($id){
+
+        $servico = Servico::where("assistida_id", $id)->orderBy('updated_at','desc')->get('id');
+
+        $assistida = Assistida::findOrFail($id);
+    
+    return view('assistida/edit_servico',['servico'=>$servico, 'assistida'=>$assistida]);
+    }
+    public function update(Request $req, $servico){
+
+        $servico = Servico::find($req -> servico);
+
+        $lanche              = isset($req->lanche);
+        $acompanhada         = isset($req->acompanhada);
+        $defensoria_publica  = isset($req->defensoria_publica);
+        $cras                = isset($req->cras);
+        $codhab              = isset($req->codhab);
+        $senac               = isset($req->senac);
+        $sesc_consulta       = isset($req->sesc_consulta);
+        $sesc_sens           = isset($req->sesc_sens);
+        $sesc_mamografia     = isset($req->sesc_mamografia);
+        $sesc_odonto         = isset($req->sesc_odonto);
+        $sesc_insercao_diu   = isset($req->sesc_insercao_diu);
+        $sesc_citopatologico = isset($req->sesc_citopatologico);
+        $sesc_enfermagem     = isset($req->sesc_enfermagem);
+        $sedet               = isset($req->sedet);
+        $secretaria_da_mulher= isset($req->secretaria_da_mulher);
+        $sec_saude           = isset($req->sec_saude);
+        $sejus_subav         = isset($req->sejus_subav);
+        $delegacia_da_mulher = isset($req->delegacia_da_mulher);
+        $fiocruz             = isset($req->fiocruz);
+
+        $servico->save();
+
+        $assistida = Assistida::findOrFail($id);
+
+        return route('assistida.index');
+    }
+
 }

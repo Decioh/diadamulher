@@ -13,6 +13,11 @@
 ion-icon {
     pointer-events: none;
 }
+
+.fullscreen-icon {
+    font-size: 2em; /* Adjust the font size as needed */
+}
+
 .container-fluid {
     width: 300px;
     padding-right: 15px;
@@ -20,10 +25,19 @@ ion-icon {
     margin-right: auto;
     margin-left: auto;
   }
-.msg{
-    background-color: #81db96;
+.fail_msg{
+    background-color: #fbfd5fce;
     border-color: #1c3a0c;
-    border: 1px solid black;
+    border: 1px solid rgb(251, 255, 0);
+    width: 50%;
+    text-align: center;
+    padding: 5px;
+    margin: auto;
+}
+.msg{
+    background-color: #7eff5763;
+    border-color: #1c3a0c;
+    border: 1px solid rgb(0, 255, 0);
     width: 50%;
     text-align: center;
     padding: 5px;
@@ -67,14 +81,7 @@ nav.menu{
 .datas{
     display: inline-block;
 }
-.btn-primary{
-    color: #ffffff !important; 
-    background-color: rgb(2, 70, 0) !important;
-    border-color: #061b00 !important;
-}
-.btn-primary:hover{
-    background-color: #061b00 !important;
-}
+
 #search-container{
     padding: 20px;
 }

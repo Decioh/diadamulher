@@ -15,6 +15,65 @@ use Carbon\Carbon;
 
 class ServicoController extends Controller
 {
+    public function create($id){
+
+        $assistida = Assistida::findOrFail($id);
+
+    return view('servico/cadastro_servico',['id'=>$id, 'assistida'=>$assistida]);
+    }
+    public function store(Request $req, $id){
+
+        $lanche              = $req->lanche;
+        $acompanhada         = isset($req->acompanhada);
+        $defensoria_publica  = isset($req->defensoria_publica);
+        $cras                = isset($req->cras);
+        $codhab              = isset($req->codhab);
+        $senac               = isset($req->senac);
+        $sesc_consulta       = isset($req->sesc_consulta);
+        $sesc_sens           = isset($req->sesc_sens);
+        $sesc_mamografia     = isset($req->sesc_mamografia);
+        $sesc_odonto         = isset($req->sesc_odonto);
+        $sesc_insercao_diu   = isset($req->sesc_insercao_diu);
+        $sesc_citopatologico = isset($req->sesc_citopatologico);
+        $sesc_enfermagem     = isset($req->sesc_enfermagem);
+        $sedet               = isset($req->sedet);
+        $secretaria_da_mulher= isset($req->secretaria_da_mulher);
+        $sec_saude           = isset($req->sec_saude);
+        $sejus_subav         = isset($req->sejus_subav);
+        $delegacia_da_mulher = isset($req->delegacia_da_mulher);
+        $fiocruz             = isset($req->fiocruz);
+        $demanda_n_atendida  = isset($req->demanda_n_atendida);
+        $qual                = isset($req->qual);
+
+        $servico = new Servico();
+
+        $servico->assistida_id        = $id;
+        $servico->lanche              = $lanche;
+        $servico->acompanhada         = $acompanhada;
+        $servico->defensoria          = $defensoria_publica;
+        $servico->cras                = $cras;
+        $servico->codhab              = $codhab;
+        $servico->senac               = $senac;
+        $servico->sesc_consulta       = $sesc_consulta;
+        $servico->sesc_sens           = $sesc_sens;
+        $servico->sesc_mamografia     = $sesc_mamografia;
+        $servico->sesc_odonto         = $sesc_odonto;
+        $servico->sesc_insercao_diu   = $sesc_insercao_diu;
+        $servico->sesc_citopatologico = $sesc_citopatologico;
+        $servico->sesc_enfermagem     = $sesc_enfermagem;
+        $servico->sedet               = $sedet;
+        $servico->secretaria_da_mulher= $secretaria_da_mulher;
+        $servico->sec_saude           = $sec_saude;
+        $servico->sejus_subav         = $sejus_subav;
+        $servico->delegacia_da_mulher = $delegacia_da_mulher;
+        $servico->fiocruz             = $fiocruz;
+        $servico->demanda_n_atendida  = $demanda_n_atendida;
+        $servico->qual                = $qual;
+
+        $servico->save();
+
+    return redirect()->route('assistida.index')->with('success', 'Serviços Cadastrados!');;
+    }
     public function dashboard(){
         $assistidas = Assistida::all()->count();  
         $servicos = Servico::all()->count(); 
@@ -116,42 +175,71 @@ class ServicoController extends Controller
     }
 
     public function show($id){
+        
+        $servico = Servico::where("assistida_id", $id)->get();
+        $servico = $servico->pop();
 
-        $servico = Servico::where("assistida_id", $id)->orderBy('updated_at','desc')->get('id');
+        if(isset($servico)){
+            $assistida = Assistida::findOrFail($id);
 
-        $assistida = Assistida::findOrFail($id);
-    
-    return view('assistida/edit_servico',['servico'=>$servico, 'assistida'=>$assistida]);
+        return view('assistida/edit_servico',['servico'=>$servico, 'assistida'=>$assistida]);
+        }
+        else
+        return redirect()->route('assistida.index')->with('fail', 'Assistida sem agendamentos!');
     }
     public function update(Request $req, $servico){
+            
 
-        $servico = Servico::find($req -> servico);
+                $lanche              = $req->lanche;
+                $acompanhada         = isset($req->acompanhada);
+                $defensoria          = isset($req->defensoria);
+                $cras                = isset($req->cras);
+                $codhab              = isset($req->codhab);
+                $senac               = isset($req->senac);
+                $sesc_consulta       = isset($req->sesc_consulta);
+                $sesc_sens           = isset($req->sesc_sens);
+                $sesc_mamografia     = isset($req->sesc_mamografia);
+                $sesc_odonto         = isset($req->sesc_odonto);
+                $sesc_insercao_diu   = isset($req->sesc_insercao_diu);
+                $sesc_citopatologico = isset($req->sesc_citopatologico);
+                $sesc_enfermagem     = isset($req->sesc_enfermagem);
+                $sedet               = isset($req->sedet);
+                $secretaria_da_mulher= isset($req->secretaria_da_mulher);
+                $sec_saude           = isset($req->sec_saude);
+                $sejus_subav         = isset($req->sejus_subav);
+                $delegacia_da_mulher = isset($req->delegacia_da_mulher);
+                $fiocruz             = isset($req->fiocruz);
+                $demanda_n_atendida  = isset($req->demanda_n_atendida);
+                $qual                = $req->qual;
 
-        $lanche              = isset($req->lanche);
-        $acompanhada         = isset($req->acompanhada);
-        $defensoria_publica  = isset($req->defensoria_publica);
-        $cras                = isset($req->cras);
-        $codhab              = isset($req->codhab);
-        $senac               = isset($req->senac);
-        $sesc_consulta       = isset($req->sesc_consulta);
-        $sesc_sens           = isset($req->sesc_sens);
-        $sesc_mamografia     = isset($req->sesc_mamografia);
-        $sesc_odonto         = isset($req->sesc_odonto);
-        $sesc_insercao_diu   = isset($req->sesc_insercao_diu);
-        $sesc_citopatologico = isset($req->sesc_citopatologico);
-        $sesc_enfermagem     = isset($req->sesc_enfermagem);
-        $sedet               = isset($req->sedet);
-        $secretaria_da_mulher= isset($req->secretaria_da_mulher);
-        $sec_saude           = isset($req->sec_saude);
-        $sejus_subav         = isset($req->sejus_subav);
-        $delegacia_da_mulher = isset($req->delegacia_da_mulher);
-        $fiocruz             = isset($req->fiocruz);
+            $servico = Servico::find($servico);
+                $servico->lanche              = $lanche;
+                $servico->acompanhada         = $acompanhada;
+                $servico->defensoria          = $defensoria;
+                $servico->cras                = $cras;
+                $servico->codhab              = $codhab;
+                $servico->senac               = $senac;
+                $servico->sesc_consulta       = $sesc_consulta;
+                $servico->sesc_sens           = $sesc_sens;
+                $servico->sesc_mamografia     = $sesc_mamografia;
+                $servico->sesc_odonto         = $sesc_odonto;
+                $servico->sesc_insercao_diu   = $sesc_insercao_diu;
+                $servico->sesc_citopatologico = $sesc_citopatologico;
+                $servico->sesc_enfermagem     = $sesc_enfermagem;
+                $servico->sedet               = $sedet;
+                $servico->secretaria_da_mulher= $secretaria_da_mulher;
+                $servico->sec_saude           = $sec_saude;
+                $servico->sejus_subav         = $sejus_subav;
+                $servico->delegacia_da_mulher = $delegacia_da_mulher;
+                $servico->fiocruz             = $fiocruz;
+                $servico->demanda_n_atendida  = $demanda_n_atendida;
+                $servico->qual                = $qual;
+            $servico->save();
+            
+            $assistida = Assistida::findOrFail($servico->assistida_id);
 
-        $servico->save();
-
-        $assistida = Assistida::findOrFail($id);
-
-        return route('assistida.index');
+        return redirect()->route('assistida.index')->with('success', 'Atualização realizada!');        
+        
     }
 
 }

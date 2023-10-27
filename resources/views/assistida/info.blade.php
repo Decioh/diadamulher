@@ -4,7 +4,15 @@
 @section('title', 'Informações assistida')
 
 @section('content')    
-
+@if (session('fail'))
+    <div class="fail_msg" id="flashmsg">
+        {{ session('fail') }}
+    </div>
+@elseif (session('success'))
+    <div class="msg">
+        {{ session('success') }}
+    </div>
+@endif
 @php
 $tel = preg_replace("/(\d{0})(\d{2})(\d{5})(\d{4})/", "\$1(\$2)\$3-\$4", $assistida->tel);
 $i=0;
@@ -18,9 +26,11 @@ $i=0;
     <b>Cadastrada em:</b> {{date('d/m/Y', strtotime($assistida->created_at))}}<br>
     <b>E-mail:</b> {{$assistida->email}}<br>
     <b>Telefone:</b> {{$tel}}<br>
-    <!--a href="#"class="btn btn-warning btn my-5"> Editar </a-->
     <a class="btn btn-warning btn my-5" data-bs-toggle="modal" data-bs-target="#ModalEdit">
       Editar
+    </a>
+    <a class="btn btn-danger btn my-5" data-bs-toggle="modal" data-bs-target="#ModalDelete">
+      Deletar
     </a>
 </p>
 
@@ -39,9 +49,18 @@ $i=0;
             <b>Servicos prestados:</b><br>
             @foreach($services as $service)
               @if(isset($service[$i]))
-                <p>{{$service[$i]}}</p>
+                @php
+                  $texto = substr($service[$i], 2, -4);
+                  $texto = ucfirst($texto);
+                @endphp
+                <p>{{ str_replace('_', ' ',$texto)}}</p>
               @endif
             @endforeach
+            <p><b>Demanda não atendida:</b><br></p>
+            @if($servico->qual)<p>{{$servico->qual}}</p><p>@else - </p>@endif
+            @if($loop->first)
+        <a href="{{route('servico.show', $assistida->id)}}"class="float-end btn btn-warning btn-sm"> Editar </a>
+      @endif
         </div>
       </div>
     </div>
@@ -53,5 +72,5 @@ $i=0;
 @endif
 
 @include('assistida.modal.edit');
-
+@include('assistida.modal.delete');
 @endsection

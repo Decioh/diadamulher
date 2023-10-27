@@ -34,7 +34,7 @@
             <a href="{{route('assistida.create')}}">Cadastrar</a>
             <a href="{{route('dashboard')}}">Estatísticas</a>
         </nav>
-        
+        <a  class="float-end mx-5 my-3"onclick="toggleFullScreen()"><ion-icon class="fullscreen-icon" name="expand"></ion-icon></a>
     </header>
         @yield('content')
 
@@ -43,6 +43,10 @@
     </footer>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    
+    <script>
+        function toggleFullScreen() {
+                document.documentElement.requestFullscreen();
+        }
+    </script>
 </body>
 </html>

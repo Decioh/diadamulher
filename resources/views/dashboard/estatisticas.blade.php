@@ -133,26 +133,26 @@
            var myPieChart = new Chart(ctx, {
               type: 'polarArea',
               data: {
-                 labels: ["sesc mamografia", "defensoria", "cras", "codhab", "senac", "sesc consulta", "sesc sens", "sesc odonto", "sesc inserção diu", "sesc citopatologico", "sesc enfermagem", "sedet", "secretaria da mulher", "sec saude", "delegacia da mulher", "fiocruz"],
+                 labels: ["sesc mamografia - {{$sesc_mamografia}}", "defensoria - {{$defensoria}}", "cras - {{$cras}}", "codhab - {{$codhab}}", "senac - {{$senac}}", "sesc consulta - {{$sesc_consulta}}", "sesc sens - {{$sesc_sens}}", "sesc odonto - {{$sesc_odonto}}", "sesc inserção diu - {{$sesc_insercao_diu}}", "sesc citopatologico - {{$sesc_citopatologico}}", "sesc enfermagem - {{$sesc_enfermagem}}", "sedet - {{$sedet}}", "secretaria da mulher - {{$secretaria_da_mulher}}", "sec saude - {{$sec_saude}}", "delegacia da mulher - {{$delegacia_da_mulher}}", "fiocruz - {{$fiocruz}}"],
                  datasets: [{
                     data: [{{$sesc_mamografia}}, {{$defensoria}}, {{$cras}},{{$codhab}}, {{$senac}}, {{$sesc_consulta}},{{$sesc_sens}}, {{$sesc_odonto}}, {{$sesc_insercao_diu}},{{$sesc_citopatologico}}, {{$sesc_enfermagem}}, {{$sedet}},{{$secretaria_da_mulher}}, {{$sec_saude}}, {{$delegacia_da_mulher}},{{$fiocruz}}],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.7)',  // Raspberry
-   'rgba(54, 162, 235, 0.7)',  // Sky Blue
-   'rgba(255, 206, 86, 0.7)',  // Sunflower Yellow
-   'rgba(75, 192, 192, 0.7)',  // Teal
-   'rgba(153, 102, 255, 0.7)', // Lavender
-   'rgba(255, 159, 64, 0.7)',  // Pumpkin Orange
-   'rgba(0, 128, 0, 0.7)',    // Forest Green
-   'rgba(128, 0, 128, 0.7)',  // Royal Purple
-   'rgba(255, 0, 0, 0.7)',    // Classic Red
-   'rgba(0, 0, 255, 0.7)',    // Deep Blue
-   'rgba(128, 128, 128, 0.7)', // Slate Gray
-   'rgba(0, 255, 0, 0.7)',    // Vivid Green
-   'rgba(255, 0, 255, 0.7)',  // Magenta
-   'rgba(0, 255, 255, 0.7)',  // Turquoise
-   'rgba(255, 255, 0, 0.7)',  // Golden Yellow
-   'rgba(165, 42, 42, 0.7)',  // Brown
+                        'rgba(54, 162, 235, 0.7)',  // Sky Blue
+                        'rgba(255, 206, 86, 0.7)',  // Sunflower Yellow
+                        'rgba(75, 192, 192, 0.7)',  // Teal
+                        'rgba(153, 102, 255, 0.7)', // Lavender
+                        'rgba(255, 159, 64, 0.7)',  // Pumpkin Orange
+                        'rgba(0, 128, 0, 0.7)',    // Forest Green
+                        'rgba(128, 0, 128, 0.7)',  // Royal Purple
+                        'rgba(255, 0, 0, 0.7)',    // Classic Red
+                        'rgba(0, 0, 255, 0.7)',    // Deep Blue
+                        'rgba(128, 128, 128, 0.7)', // Slate Gray
+                        'rgba(0, 255, 0, 0.7)',    // Vivid Green
+                        'rgba(255, 0, 255, 0.7)',  // Magenta
+                        'rgba(0, 255, 255, 0.7)',  // Turquoise
+                        'rgba(255, 255, 0, 0.7)',  // Golden Yellow
+                        'rgba(165, 42, 42, 0.7)',  // Brown
                     ],
                     borderColor: [
                         'rgba(255, 99, 132,  1)',  // Raspberry

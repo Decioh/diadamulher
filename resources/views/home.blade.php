@@ -2,7 +2,21 @@
 
 @section('title', 'Agendar')
 
+<script>
+    setTimeout(function() {
+     $('#flashmsg').remove();
+    }, 3000); 
+</script>
 @section('content') 
+@if (session('fail'))
+    <div class="fail_msg" id="flashmsg">
+        {{ session('fail') }}
+    </div>
+@elseif (session('success'))
+    <div class="msg">
+        {{ session('success') }}
+    </div>
+@endif
 
 <div id="search-container" class="col-md-12 justify-content-center">
     <h2>Buscar assistido</h2>
@@ -12,7 +26,7 @@
     </form>
 </div>
 
-<div class="listAssistidos">
+<div class="listAssistidos mb-5">
 <table class="table">
     <thead>
         <tr>
@@ -38,8 +52,9 @@
                 <td>{{$cidades[$assistida->cidades_id-1]->RA}}</td>
                 <td>@if($assistida->created_at != null){{date('d/m/Y', strtotime($assistida -> updated_at))}} @else - @endif</td>
                 <td>
-                    <a href="{{route('assistida.show', $assistida->id)}}"class="btn btn-secondary btn-sm"> info </a>
-                    <a href="{{route('servico.show', $assistida->id)}}"class="btn btn-success btn-sm"> Último Atendimento </a>
+                    <a href="{{route('servico.create', $assistida->id)}}"class="btn btn-success btn-sm"> Atender Assistida</a>
+                    <a href="{{route('servico.show', $assistida->id)}}"class="btn btn-info btn-sm"> Último Atendimento </a>
+                    <a href="{{route('assistida.show', $assistida->id)}}"class="btn btn-secondary btn-sm"> Info </a>
                 </td>
             </tr>
         </tbody>
@@ -55,6 +70,6 @@
     
     <div class="mt-3 mx-auto" style="width: 150px">
     {{$assistidas->links()}}
-    </div>
+</div>
 
 @endsection

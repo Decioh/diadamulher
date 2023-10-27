@@ -35,21 +35,12 @@
                 </div> <br>
                 <div class="form-group">
                     <p>
-                        <input type="submit" class="btn btn-secondary" value="Confirmar alterações" >
+                        <input type="submit" class="btn btn-success" value="Confirmar alterações" >
                     </p>
                 </div>
             </div>
             </form>
-            <form action="{{-- route('assistida.destroy', $assistida->id) --}}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-danger delete-btn">Deletar assistida</button>
-            </form>
         </div>
-        <!--div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-          <button type="button" class="btn btn-primary">Confirmar</button>
-        </div-->
       </div>
     </div>
   </div>

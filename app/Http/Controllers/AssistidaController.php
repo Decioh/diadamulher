@@ -39,7 +39,6 @@ class AssistidaController extends Controller
     }
     public function store(Request $req)
     {
-
         $assistida = new Assistida();
 
         $assistida->nome       = $req->nome;
@@ -70,6 +69,8 @@ class AssistidaController extends Controller
         $sejus_subav         = isset($req->sejus_subav);
         $delegacia_da_mulher = isset($req->delegacia_da_mulher);
         $fiocruz             = isset($req->fiocruz);
+        $demanda_n_atendida  = isset($req->demanda_n_atendida);
+        $qual                = isset($req->qual);
 
         $servico = new Servico();
 
@@ -93,6 +94,8 @@ class AssistidaController extends Controller
         $servico->sejus_subav         = $sejus_subav;
         $servico->delegacia_da_mulher = $delegacia_da_mulher;
         $servico->fiocruz             = $fiocruz;
+        $servico->demanda_n_atendida  = $demanda_n_atendida;
+        $servico->qual                = $qual;
 
         $servico->save();
     return redirect()->route('assistida.index');
@@ -101,7 +104,7 @@ class AssistidaController extends Controller
 
         $assistida = Assistida::findOrFail($id);
 
-        $servicos = DB::table('servicos')->where('assistida_id',$id)->get(); 
+        $servicos = DB::table('servicos')->where('assistida_id',$id)->orderBy('created_at', 'desc')->get(); 
 
         $defensoria = Servico::where('assistida_id',$id)->where('defensoria', '=', '1')->get('defensoria');
         $cras = Servico::where('assistida_id',$id)->where('cras', '=', '1')->get('cras');
@@ -157,22 +160,12 @@ class AssistidaController extends Controller
             array_push($services, $fiocruz);
         if(isset($sedet[0]))
             array_push($services, $sedet);
-            
-
-
 
         $cidades = DB::table('cidades')->get();
 
     return view('/assistida/info', ['assistida' => $assistida, 'servicos'=> $servicos,'cidades'=>$cidades, 'services'=>$services]);
     }
 
-/*    public function edit($id){
-
-        $assistida = Assistida::find($id);
-
-    return view ('edit',['assistido'=>$assistido]);
-    }
-*/
     public function update(Request $req){
 
         $assistida = Assistida::find($req -> id);
@@ -185,8 +178,16 @@ class AssistidaController extends Controller
         $assistida->save();
         $assistidas = Assistida::orderBy('nome', 'asc')->simplePaginate(20);
 
-    //return view('home',['assistidas' => $assistidas])->with('msg', 'Dados Atualizados!');
-    return back();   
+    //return view('home',['assistidas' => $assistidas]);
+    return back()->with('success', 'Atualização realizada!'); 
         
+    }
+    public function destroy($id){
+
+        DB::table('agendas')->where('assistido_id', $id)
+        ->update(['assistido_id' => null,'Status' => 0]);
+        Assistido::destroy('id', $id);
+
+    return redirect()->route('assistida.index')->with('success', 'Assistida deletada'); ;
     }
 }

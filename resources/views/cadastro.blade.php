@@ -61,7 +61,7 @@
             <div class="mb-3 form-check form-check-inline">
                 <label class="mx-3"> Sejus Subav         <input type="checkbox" name="sejus_subav" value="1"></label>
                 <label class="mx-3"> Delegacia da mulher <input type="checkbox" name="delegacia_da_mulher" value="1"></label>
-                <label class="mx-3"> Fiocruz             <input type="checkbox" name="Fiocruz" value="1"></label>
+                <label class="mx-3"> Fiocruz             <input type="checkbox" name="fiocruz" value="1"></label>
             </div>
         </div>
         <div class="mb-3 form-check form-check-inline">

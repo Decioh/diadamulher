@@ -36,7 +36,7 @@
             <label> Acompanhada <input type="checkbox" name="acompanhada" value="1"></label>
         </div>
         <div class="container p-5">
-            <div class="mb-3 form-check col">
+            <div class="mb-3 form-check col ">
               <label class="mx-3"> Defensoria Pública <input type="checkbox" name="defensoria_publica" value="1"></label>
               <label class="mx-3"> CRAS <input  type="checkbox" name="cras" value="1"></label>
               <label class="mx-3"> CODHAB <input  type="checkbox" name="codhab" value="1"></label>

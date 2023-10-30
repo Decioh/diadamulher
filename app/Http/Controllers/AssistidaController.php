@@ -125,7 +125,7 @@ class AssistidaController extends Controller
         $sedet = Servico::where('assistida_id',$id)->where('sedet', '=', '1')->get('sedet');
         $services=null;
         $services = (array)$services;
-        
+
         if(isset($defensoria[0]))
             array_push($services, $defensoria);
         if(isset($cras[0]))
@@ -184,9 +184,11 @@ class AssistidaController extends Controller
     }
     public function destroy($id){
 
-        DB::table('agendas')->where('assistido_id', $id)
-        ->update(['assistido_id' => null,'Status' => 0]);
-        Assistido::destroy('id', $id);
+
+        DB::table('servicos')->where('assistida_id', $id)
+        ->update(['assistida_id' => null]);
+        Assistida::destroy('id', $id);
+
 
     return redirect()->route('assistida.index')->with('success', 'Assistida deletada'); ;
     }

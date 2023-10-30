@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('servicos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('assistida_id');
-            $table->foreign('assistida_id')->references('id')->on('assistidas');
+            $table->foreign('assistida_id')->references('id')->on('assistidas')->nullable();
             $table->integer('lanche')->default('0') ; 
             $table->integer('lanches_QTD')->nullable();
             $table->boolean('acompanhada')->default('0');
@@ -31,6 +31,7 @@ return new class extends Migration
             $table->boolean('sesc_enfermagem')->default('0');
             $table->boolean('sedet')->default('0');
             $table->boolean('secretaria_da_mulher')->default('0');
+            $table->boolean('vacinacao_ses')->default('0');
             $table->boolean('sec_saude')->default('0');
             $table->boolean('sejus_subav')->default('0');
             $table->boolean('delegacia_da_mulher')->default('0');

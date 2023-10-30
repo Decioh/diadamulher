@@ -8,7 +8,7 @@
         </div>
         <div>
             <p>
-               Se essa assistida for deletada, seus atendimentos e serviços também serão deletados!<br><b>Essa ação não pode ser desfeita!</b><br>
+               Se essa assistida for deletada, seus atendimentos e serviços não poderão mais ser editados, mas serão mantidos nas estatísticas!<br><b>Essa ação não pode ser desfeita!</b><br>
                Quantidade de servicos: {{$servicos->count()}}.
             </p>
         </div>

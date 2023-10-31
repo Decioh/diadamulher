@@ -42,6 +42,10 @@ class ServicoController extends Controller
         $sejus_subav         = isset($req->sejus_subav);
         $delegacia_da_mulher = isset($req->delegacia_da_mulher);
         $fiocruz             = isset($req->fiocruz);
+        $nupemec             = isset($req->nupemec);
+        $pmdf                = isset($req->pmdf);
+        $seped               = isset($req->seped);
+        $sabin               = isset($req->sabin);
         $demanda_n_atendida  = isset($req->demanda_n_atendida);
         $qual                = isset($req->qual);
 
@@ -67,6 +71,10 @@ class ServicoController extends Controller
         $servico->sejus_subav         = $sejus_subav;
         $servico->delegacia_da_mulher = $delegacia_da_mulher;
         $servico->fiocruz             = $fiocruz;
+        $servico->nupemec             = $nupemec;
+        $servico->pmdf                = $pmdf;
+        $servico->seped               = $seped;
+        $servico->sabin               = $sabin;
         $servico->demanda_n_atendida  = $demanda_n_atendida;
         $servico->qual                = $qual;
 
@@ -143,7 +151,11 @@ class ServicoController extends Controller
             $sejus_subav = Servico::whereYear('updated_at',$ano)->whereMonth('updated_at', $mes_filter)->where('sejus_subav', '=', '1')->count();
             $delegacia_da_mulher = Servico::whereYear('updated_at',$ano)->whereMonth('updated_at', $mes_filter)->where('delegacia_da_mulher', '=', '1')->count();
             $fiocruz = Servico::whereYear('updated_at',$ano)->whereMonth('updated_at', $mes_filter)->where('fiocruz', '=', '1')->count();
-            $sedet = Servico::whereYear('updated_at',$ano)->whereMonth('updated_at', $mes_filter)                                       ->where('sedet', '=', '1')->count();
+            $sedet = Servico::whereYear('updated_at',$ano)->whereMonth('updated_at', $mes_filter)->where('sedet', '=', '1')->count();
+            $nupemec=Servico::whereYear('updated_at',$ano)->whereMonth('updated_at', $mes_filter)->where('nupemec', '=', '1')->count();
+            $pmdf   =Servico::whereYear('updated_at',$ano)->whereMonth('updated_at', $mes_filter)->where('pmdf', '=', '1')->count();
+            $seped  =Servico::whereYear('updated_at',$ano)->whereMonth('updated_at', $mes_filter)->where('seped', '=', '1')->count();
+            $sabin  =Servico::whereYear('updated_at',$ano)->whereMonth('updated_at', $mes_filter)->where('sabin', '=', '1')->count();
         }
         else{/*Sem filtros*/
             $defensoria = Servico::whereYear('updated_at',$ano)->where('defensoria', '=', '1')->count();
@@ -163,15 +175,19 @@ class ServicoController extends Controller
             $delegacia_da_mulher = Servico::whereYear('updated_at',$ano)->where('delegacia_da_mulher', '=', '1')->count();
             $fiocruz = Servico::whereYear('updated_at',$ano)->where('fiocruz', '=', '1')->count();
             $sedet = Servico::whereYear('updated_at',$ano)->where('sedet', '=', '1')->count();
+            $nupemec = Servico::whereYear('updated_at',$ano)->where('nupemec', '=', '1')->count();
+            $pmdf = Servico::whereYear('updated_at',$ano)->where('pmdf', '=', '1')->count();
+            $seped = Servico::whereYear('updated_at',$ano)->where('seped', '=', '1')->count();
+            $sabin = Servico::whereYear('updated_at',$ano)->where('sabin', '=', '1')->count();
         }
 
-        $total=$defensoria+$cras+$codhab+$senac+$sesc_consulta+$sesc_sens+$sesc_mamografia+$sesc_odonto+$sesc_insercao_diu+$sesc_citopatologico+$sesc_enfermagem+$secretaria_da_mulher+$sec_saude+$sejus_subav+$delegacia_da_mulher+$fiocruz;
+        $total=$defensoria+$cras+$codhab+$senac+$sesc_consulta+$sesc_sens+$sesc_mamografia+$sesc_odonto+$sesc_insercao_diu+$sesc_citopatologico+$sesc_enfermagem+$secretaria_da_mulher+$sec_saude+$sejus_subav+$delegacia_da_mulher+$fiocruz+$nupemec+$pmdf+$seped;
 
 
     return view('dashboard/estatisticas',['servicos_mes'=>$servicos_mes, 'month'=>$month, 'selected_month'=>$selected_month,'ano'=>$ano,'meses'=>$meses,'total'=>$total,'tot_p_mes'=>$tot_p_mes ,'assistidas'=>$assistidas,
     'servicos'=>$servicos, 'defensoria'=>$defensoria, 'cras'=>$cras, 'codhab'=>$codhab, 'senac'=>$senac, 'sesc_consulta'=>$sesc_consulta, 'sesc_sens'=>$sesc_sens,
     'sesc_mamografia'=>$sesc_mamografia, 'sesc_odonto'=>$sesc_odonto, 'sesc_insercao_diu'=>$sesc_insercao_diu, 'sesc_citopatologico'=>$sesc_citopatologico, 'sesc_enfermagem'=>$sesc_enfermagem, 
-    'secretaria_da_mulher'=>$secretaria_da_mulher, 'sec_saude'=>$sec_saude, 'sejus_subav'=>$sejus_subav, 'delegacia_da_mulher'=>$delegacia_da_mulher, 'fiocruz'=>$fiocruz,'sedet'=>$sedet]);
+    'secretaria_da_mulher'=>$secretaria_da_mulher, 'sec_saude'=>$sec_saude, 'sejus_subav'=>$sejus_subav, 'delegacia_da_mulher'=>$delegacia_da_mulher, 'fiocruz'=>$fiocruz,'sedet'=>$sedet, 'nupemec'=>$nupemec, 'pmdf'=>$pmdf, 'seped'=>$seped, 'sabin'=>$sabin]);
     }
 
     public function show($id){
@@ -209,6 +225,11 @@ class ServicoController extends Controller
                 $sejus_subav         = isset($req->sejus_subav);
                 $delegacia_da_mulher = isset($req->delegacia_da_mulher);
                 $fiocruz             = isset($req->fiocruz);
+                $nupemec             = isset($req->nupemec);
+                $pmdf                = isset($req->pmdf);
+                $seped               = isset($req->seped);
+                $sabin               = isset($req->sabin);
+                
                 $demanda_n_atendida  = isset($req->demanda_n_atendida);
                 $qual                = $req->qual;
 
@@ -232,6 +253,11 @@ class ServicoController extends Controller
                 $servico->sejus_subav         = $sejus_subav;
                 $servico->delegacia_da_mulher = $delegacia_da_mulher;
                 $servico->fiocruz             = $fiocruz;
+                $servico->nupemec             = $nupemec;
+                $servico->pmdf                = $pmdf;
+                $servico->seped               = $seped;
+                $servico->sabin               = $sabin;
+                
                 $servico->demanda_n_atendida  = $demanda_n_atendida;
                 $servico->qual                = $qual;
             $servico->save();

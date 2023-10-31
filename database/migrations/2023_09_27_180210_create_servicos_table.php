@@ -36,6 +36,10 @@ return new class extends Migration
             $table->boolean('sejus_subav')->default('0');
             $table->boolean('delegacia_da_mulher')->default('0');
             $table->boolean('fiocruz')->default('0');
+            $table->boolean('nupemec')->default('0');
+            $table->boolean('pmdf')->default('0');
+            $table->boolean('seped')->default('0');
+            $table->boolean('sabin')->default('0');
             $table->boolean('demanda_n_atendida')->default('0');
             $table->char('qual')->nullable();
             $table->timestamps();

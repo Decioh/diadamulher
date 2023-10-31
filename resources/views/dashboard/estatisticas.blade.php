@@ -45,25 +45,34 @@
             <span class="d-inline-flex p-2">
                 <form action="{{route('dashboard')}}">
                     @csrf
-                    <label for="começo"><input type="number" value="2023" min="2023" max="2099" step="1" value="{{$ano}}" class="form-control" id="ano" name="ano"></label>
-                    <input type="submit" class="btn btn-warning btn-sm" value="filtrar" >
+                    <!--input type="submit" class="btn btn-warning btn-sm" value="filtrar" -->
+                    <label for="mes_filter">
+                        <select class=" form-select form-select-sm my-2 mx-2 " aria-label="Default select example" name="mes_filter" id="mes_filter"> <!--Mudar mes_filter para Carbon::now('M')-->
+                            @foreach ($month as $month)
+                                <option value="{{ $loop->iteration }}">{{ $month }}</option>
+                            @endforeach
+                        </select>
+                        <label for="começo"><input type="number" value="2023" min="2023" max="2099" step="1" value="{{$ano}}" class="form-control" id="ano" name="ano"></label>
+                        <input type="submit" class="btn btn-warning btn-sm mx-3" value="filtrar" >
+                        <a href="{{route('dashboard')}}"><input type="button" class="btn btn-secondary btn-sm" value="resetar" ></a>
+                    </label>
                 </form>
             </span>
                 <h5 class="center"> Atendimentos por mês</h5>
                 @if($meses == 'nenhum agendamento no Ano selecionado')
                 <p style="font-weight:bold">Nenhum histórico no Ano de {{$ano}}</p>
                 @endif
-                <canvas id="myChart" width="700" height="350"></canvas>
+                <canvas id="myChart" width="700" height="350{{--175--}}"></canvas>
         </div>           
     </section> 
     <section class="graficos col 12 my-5">            
         <div class="grafico card z-depth-4">
             <span class="d-inline-flex p-2">
-                <form action="{{route('dashboard')}}">
+                {{--<form action="{{route('dashboard')}}">
                     <input type="hidden" name="ano" value="{{$ano}}">
                     @csrf
                     <label for="mes_filter">
-                        <select class=" form-select form-select-sm my-2 mx-2 " aria-label="Default select example" name="mes_filter" id="mes_filter">
+                        <select class=" form-select form-select-sm my-2 mx-2 " aria-label="Default select example" name="mes_filter" id="mes_filter"> <!--Mudar mes_filter para Carbon::now('M')-->
                             @foreach ($month as $month)
                                 <option value="{{ $loop->iteration }}">{{ $month }}</option>
                             @endforeach
@@ -71,14 +80,14 @@
                         </label>
                     <input type="submit" class="btn btn-warning btn-sm mx-3" value="filtrar" >
                     <a href="{{route('dashboard')}}"><input type="button" class="btn btn-secondary btn-sm" value="resetar" ></a>
-                </form>
+                </form>--}}
             </span>
             <h5 class="center"> Pareceres @if($selected_month != 'todos os meses') <span style="font-weight:bold" >{{$selected_month}}</span> @endif</h5>
             @if($total == 0)
                 <p style="font-weight:bold">Nenhum histórico para {{$selected_month}} de {{$ano}}</p>
             @endif
             <div>
-                <canvas id="myPieChart"  width="850" height="450"></canvas>
+                <canvas id="myPieChart"  width="850" height="450{{--350--}}"></canvas>
             </div> 
         </div>
     </section>           
@@ -133,9 +142,9 @@
            var myPieChart = new Chart(ctx, {
               type: 'polarArea',
               data: {
-                 labels: ["sesc mamografia - {{$sesc_mamografia}}", "defensoria - {{$defensoria}}", "cras - {{$cras}}", "codhab - {{$codhab}}", "senac - {{$senac}}", "sesc consulta - {{$sesc_consulta}}", "sesc sens - {{$sesc_sens}}", "sesc odonto - {{$sesc_odonto}}", "sesc inserção diu - {{$sesc_insercao_diu}}", "sesc citopatologico - {{$sesc_citopatologico}}", "sesc enfermagem - {{$sesc_enfermagem}}", "sedet - {{$sedet}}", "secretaria da mulher - {{$secretaria_da_mulher}}", "sec saude - {{$sec_saude}}", "delegacia da mulher - {{$delegacia_da_mulher}}", "fiocruz - {{$fiocruz}}"],
+                 labels: ["sesc mamografia - {{$sesc_mamografia}}", "defensoria - {{$defensoria}}", "cras - {{$cras}}", "codhab - {{$codhab}}", "senac - {{$senac}}", "sesc consulta - {{$sesc_consulta}}", "sesc sens - {{$sesc_sens}}", "sesc odonto - {{$sesc_odonto}}", "sesc inserção diu - {{$sesc_insercao_diu}}", "sesc citopatologico - {{$sesc_citopatologico}}", "sesc enfermagem - {{$sesc_enfermagem}}", "sedet - {{$sedet}}", "secretaria da mulher - {{$secretaria_da_mulher}}", "sec saude - {{$sec_saude}}", "delegacia da mulher - {{$delegacia_da_mulher}}", "fiocruz - {{$fiocruz}}", "nupemec - {{$nupemec}}", "seped - {{$seped}}", "pmdf - {{$pmdf}}"],
                  datasets: [{
-                    data: [{{$sesc_mamografia}}, {{$defensoria}}, {{$cras}},{{$codhab}}, {{$senac}}, {{$sesc_consulta}},{{$sesc_sens}}, {{$sesc_odonto}}, {{$sesc_insercao_diu}},{{$sesc_citopatologico}}, {{$sesc_enfermagem}}, {{$sedet}},{{$secretaria_da_mulher}}, {{$sec_saude}}, {{$delegacia_da_mulher}},{{$fiocruz}}],
+                    data: [{{$sesc_mamografia}}, {{$defensoria}}, {{$cras}},{{$codhab}}, {{$senac}}, {{$sesc_consulta}},{{$sesc_sens}}, {{$sesc_odonto}}, {{$sesc_insercao_diu}},{{$sesc_citopatologico}}, {{$sesc_enfermagem}}, {{$sedet}},{{$secretaria_da_mulher}}, {{$sec_saude}}, {{$delegacia_da_mulher}},{{$fiocruz}},{{$nupemec}},{{$seped}},{{$pmdf}}],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.7)',  // Raspberry
                         'rgba(54, 162, 235, 0.7)',  // Sky Blue
@@ -146,13 +155,16 @@
                         'rgba(0, 128, 0, 0.7)',    // Forest Green
                         'rgba(128, 0, 128, 0.7)',  // Royal Purple
                         'rgba(255, 0, 0, 0.7)',    // Classic Red
-                        'rgba(0, 0, 255, 0.7)',    // Deep Blue
+                        'rgba(50, 50, 255, 0.7)',    // Blue
                         'rgba(128, 128, 128, 0.7)', // Slate Gray
                         'rgba(0, 255, 0, 0.7)',    // Vivid Green
                         'rgba(255, 0, 255, 0.7)',  // Magenta
                         'rgba(0, 255, 255, 0.7)',  // Turquoise
                         'rgba(255, 255, 0, 0.7)',  // Golden Yellow
                         'rgba(165, 42, 42, 0.7)',  // Brown
+                        'rgba(50, 50, 100, 0.7)',  // Turquoise
+                        'rgba(255, 50, 50, 0.7)',  // Golden Yellow
+                        'rgba(0, 0, 255, 0.7)'  // Deep Blue
                     ],
                     borderColor: [
                         'rgba(255, 99, 132,  1)',  // Raspberry
@@ -171,6 +183,9 @@
                         'rgba(0, 255, 255,   1)',  // Turquoise
                         'rgba(255, 255, 0,   1)',  // Golden Yellow
                         'rgba(165, 42, 42,   1)',  // Brown
+                        'rgba(50, 50, 100,   1)',  // Turquoise
+                        'rgba(255, 0, 0,   1)',  // Golden Yellow
+                        'rgba(50, 50, 200,   1)'  // blue
                     ],
                     borderWidth: 1
                  }]

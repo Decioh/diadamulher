@@ -69,8 +69,12 @@ class AssistidaController extends Controller
         $sejus_subav         = isset($req->sejus_subav);
         $delegacia_da_mulher = isset($req->delegacia_da_mulher);
         $fiocruz             = isset($req->fiocruz);
+        $nupemec             = isset($req->nupemec);
+        $pmdf                = isset($req->pmdf);
+        $seped               = isset($req->seped);
+        $sabin               = isset($req->sabin);
         $demanda_n_atendida  = isset($req->demanda_n_atendida);
-        $qual                = isset($req->qual);
+        $qual                = $req->qual;
 
         $servico = new Servico();
 
@@ -94,6 +98,10 @@ class AssistidaController extends Controller
         $servico->sejus_subav         = $sejus_subav;
         $servico->delegacia_da_mulher = $delegacia_da_mulher;
         $servico->fiocruz             = $fiocruz;
+        $servico->nupemec             = $nupemec;
+        $servico->pmdf                = $pmdf;
+        $servico->seped               = $seped;
+        $servico->sabin               = $sabin;
         $servico->demanda_n_atendida  = $demanda_n_atendida;
         $servico->qual                = $qual;
 
@@ -123,6 +131,10 @@ class AssistidaController extends Controller
         $delegacia_da_mulher = Servico::where('assistida_id',$id)->where('delegacia_da_mulher', '=', '1')->get('delegacia_da_mulher');
         $fiocruz = Servico::where('assistida_id',$id)->where('fiocruz', '=', '1')->get('fiocruz');
         $sedet = Servico::where('assistida_id',$id)->where('sedet', '=', '1')->get('sedet');
+        $nupemec = Servico::where('assistida_id',$id)->where('nupemec', '=', '1')->get('nupemec');
+        $pmdf = Servico::where('assistida_id',$id)->where('pmdf', '=', '1')->get('pmdf');
+        $seped = Servico::where('assistida_id',$id)->where('seped', '=', '1')->get('seped');
+        $sabin = Servico::where('assistida_id',$id)->where('sabin', '=', '1')->get('sabin');
         $services=null;
         $services = (array)$services;
 
@@ -160,6 +172,14 @@ class AssistidaController extends Controller
             array_push($services, $fiocruz);
         if(isset($sedet[0]))
             array_push($services, $sedet);
+        if(isset($nupemec[0]))
+            array_push($services, $nupemec);
+        if(isset($pmdf[0]))
+            array_push($services, $pmdf);
+        if(isset($seped[0]))
+            array_push($services, $seped);
+        if(isset($sabin[0]))
+            array_push($services, $sabin);
 
         $cidades = DB::table('cidades')->get();
 
@@ -178,7 +198,6 @@ class AssistidaController extends Controller
         $assistida->save();
         $assistidas = Assistida::orderBy('nome', 'asc')->simplePaginate(20);
 
-    //return view('home',['assistidas' => $assistidas]);
     return back()->with('success', 'Atualização realizada!'); 
         
     }

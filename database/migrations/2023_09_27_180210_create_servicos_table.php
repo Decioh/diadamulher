@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('assistida_id');
             $table->foreign('assistida_id')->references('id')->on('assistidas')->nullable();
-            $table->integer('lanche')->default('0') ; 
-            $table->integer('lanches_QTD')->nullable();
+            $table->integer('lanche')->default('0'); 
+            $table->integer('lanches_QTD')->nullable()->default('0');
             $table->boolean('acompanhada')->default('0');
             $table->boolean('defensoria')->default('0');
             $table->boolean('cras')->default('0');

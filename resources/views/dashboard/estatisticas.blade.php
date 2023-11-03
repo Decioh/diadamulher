@@ -82,12 +82,12 @@
                     <a href="{{route('dashboard')}}"><input type="button" class="btn btn-secondary btn-sm" value="resetar" ></a>
                 </form>--}}
             </span>
-            <h5 class="center"> Pareceres @if($selected_month != 'todos os meses') <span style="font-weight:bold" >{{$selected_month}}</span> @endif</h5>
+            <h5 class="center mb-2"> Servicos @if($selected_month != 'todos os meses') <span style="font-weight:bold" >{{$selected_month}}</span> @endif</h5>
             @if($total == 0)
                 <p style="font-weight:bold">Nenhum histórico para {{$selected_month}} de {{$ano}}</p>
             @endif
             <div>
-                <canvas id="myPieChart"  width="850" height="450{{--350--}}"></canvas>
+                <canvas id="myPieChart"  width="850" height="555{{--350--}}"></canvas>
             </div> 
         </div>
     </section>           

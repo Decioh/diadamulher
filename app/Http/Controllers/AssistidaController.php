@@ -20,10 +20,10 @@ class AssistidaController extends Controller
             if($search){
                 $assistidas = DB::table('assistidas')
                     ->where('nome', 'like', '%'.$search.'%')
-                    ->orWhere('tel', 'like','%'.$search.'%')->simplePaginate(20);
+                    ->orWhere('tel', 'like','%'.$search.'%')->Paginate(5);
             }
             else{
-                $assistidas = Assistida::orderBy('nome', 'asc')->simplePaginate(20);
+                $assistidas = Assistida::orderBy('nome', 'asc')->Paginate(5);
             }
         $cidades = DB::table('cidades')->get();
     return view ('home', ['assistidas'=>$assistidas, 'search'=>$search, 'cidades'=>$cidades]);
@@ -50,7 +50,7 @@ class AssistidaController extends Controller
 
         $assistida_id = $assistida->id;
 
-        $lanche              = $req->lanche;
+        $lanche              = isset($req->lanche);
         $acompanhada         = isset($req->acompanhada);
         $defensoria_publica  = isset($req->defensoria_publica);
         $cras                = isset($req->cras);

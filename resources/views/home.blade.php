@@ -25,12 +25,10 @@
         <button type="submit" class="btn btn-warning btn-sm mt-1">Pesquisar</button>
     </form>
 </div>
-
 <div class="listAssistidos mb-5">
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">#</th>
             <th scope="col">Nome</th>
             <th scope="col">Telefone</th>
             <th scope="col">E-mail</th>
@@ -45,7 +43,6 @@
         @endphp
         <tbody>
             <tr>
-                <th scope="row">{{ $loop->iteration }}</th>
                 <td>{{$assistida->nome}}</td>
                 <td>{{$tel}}</td>
                 <td>{{$assistida->email}}</td>
@@ -58,7 +55,6 @@
                 </td>
             </tr>
         </tbody>
-    
 @endforeach
 @if(isset($search))
     @if((count($assistidas)==0))
@@ -69,7 +65,7 @@
     </div>
     
     <div class="mt-3 mx-auto" style="width: 150px">
-    {{$assistidas->links()}}
 </div>
+<div class="row">{{$assistidas->links('pagination::bootstrap-4')}}</div>
 
 @endsection

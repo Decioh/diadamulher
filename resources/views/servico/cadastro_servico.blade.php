@@ -8,7 +8,7 @@
 <form action="{{ route('servico.store', $assistida->id) }}" method="POST">
     @csrf
     <div class="mt-3">
-        <label>Lanches <input type="text" name="lanche" ></label>
+        <label>Lanches <input type="text" name="lanche" placeholder="0" ></label>
     </div>
     <div class="mt-3">
         <label> Acompanhada <input type="checkbox" name="acompanhada" value="1" ></label>

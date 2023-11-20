@@ -137,49 +137,50 @@ class AssistidaController extends Controller
         $sabin = Servico::where('assistida_id',$id)->where('sabin', '=', '1')->get('sabin');
         $services=null;
         $services = (array)$services;
-
-        if(isset($defensoria[0]))
-            array_push($services, $defensoria);
-        if(isset($cras[0]))
-            array_push($services, $cras);
-        if(isset($codhab[0]))
-            array_push($services, $codhab);
-        if(isset($senac[0]))
-            array_push($services, $senac);
-        if(isset($sesc_consulta[0]))
-            array_push($services, $sesc_consulta);
-        if(isset($sesc_sens[0]))
-            array_push($services, $sesc_sens);
-        if(isset($sesc_mamografia[0]))
-            array_push($services, $sesc_mamografia);
-        if(isset($sesc_odonto[0]))
-            array_push($services, $sesc_odonto);
-        if(isset($sesc_insercao_diu[0]))
-            array_push($services, $sesc_insercao_diu);
-        if(isset($sesc_citopatologico[0]))
-            array_push($services, $sesc_citopatologico);
-        if(isset($sesc_enfermagem[0]))
-            array_push($services, $sesc_enfermagem);
-        if(isset($secretaria_da_mulher[0]))
-            array_push($services, $secretaria_da_mulher);
-        if(isset($sec_saude[0]))
-            array_push($services, $sec_saude);
-        if(isset($sejus_subav[0]))
-            array_push($services, $sejus_subav);
-        if(isset($delegacia_da_mulher[0]))
-            array_push($services, $delegacia_da_mulher);
-        if(isset($fiocruz[0]))
-            array_push($services, $fiocruz);
-        if(isset($sedet[0]))
-            array_push($services, $sedet);
-        if(isset($nupemec[0]))
-            array_push($services, $nupemec);
-        if(isset($pmdf[0]))
-            array_push($services, $pmdf);
-        if(isset($seped[0]))
-            array_push($services, $seped);
-        if(isset($sabin[0]))
-            array_push($services, $sabin);
+        foreach($servicos as $servico){
+            if(isset($defensoria[0]))
+                array_push($services, $defensoria);
+            if(isset($cras[0]))
+                array_push($services, $cras);
+            if(isset($codhab[0]))
+                array_push($services, $codhab);
+            if(isset($senac[0]))
+                array_push($services, $senac);
+            if(isset($sesc_consulta[0]))
+                array_push($services, $sesc_consulta);
+            if(isset($sesc_sens[0]))
+                array_push($services, $sesc_sens);
+            if(isset($sesc_mamografia[0]))
+                array_push($services, $sesc_mamografia);
+            if(isset($sesc_odonto[0]))
+                array_push($services, $sesc_odonto);
+            if(isset($sesc_insercao_diu[0]))
+                array_push($services, $sesc_insercao_diu);
+            if(isset($sesc_citopatologico[0]))
+                array_push($services, $sesc_citopatologico);
+            if(isset($sesc_enfermagem[0]))
+                array_push($services, $sesc_enfermagem);
+            if(isset($secretaria_da_mulher[0]))
+                array_push($services, $secretaria_da_mulher);
+            if(isset($sec_saude[0]))
+                array_push($services, $sec_saude);
+            if(isset($sejus_subav[0]))
+                array_push($services, $sejus_subav);
+            if(isset($delegacia_da_mulher[0]))
+                array_push($services, $delegacia_da_mulher);
+            if(isset($fiocruz[0]))
+                array_push($services, $fiocruz);
+            if(isset($sedet[0]))
+                array_push($services, $sedet);
+            if(isset($nupemec[0]))
+                array_push($services, $nupemec);
+            if(isset($pmdf[0]))
+                array_push($services, $pmdf);
+            if(isset($seped[0]))
+                array_push($services, $seped);
+            if(isset($sabin[0]))
+                array_push($services, $sabin);
+        }
 
         $cidades = DB::table('cidades')->get();
 

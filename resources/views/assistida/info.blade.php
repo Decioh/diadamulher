@@ -39,32 +39,29 @@ $i=0;
 
 @if(count($servicos)>0)    
     @foreach( $servicos as $servico )
-    <div class="card mx-auto mb-5" style="width: 40rem;">
+    @dump($servico)
+      <div class="card mx-auto mb-5" style="width: 40rem;">
         <div class="row d-flex justify-content-center">
-        <div class="card-body">
-          <h5 class="card-title">{{date('d/m/y', strtotime($servico->created_at))}}</h5>
-          <h6 class="card-subtitle mb-2 text-muted">{{date('H:i', strtotime($servico->created_at))}}</h6>
-          <p class="card-text">Informações do agendamento:<br> </p>
-          @php $i=$loop->index @endphp
-            <b>Servicos prestados:</b><br>
-            @foreach($services as $service)
-              @if(isset($service[$i]))
-                @php
-                  $texto = substr($service[$i], 2, -4);
-                  $texto = ucfirst($texto);
-                @endphp
-                <p>{{ str_replace('_', ' ',$texto)}}</p>
-              @endif
-            @endforeach
-            <p><b>Demanda não atendida:</b><br></p>
-            @if($servico->qual)<p>{{$servico->qual}}</p><p>@else - </p>@endif
-            @if($loop->first)
-        <a href="{{route('servico.show', $assistida->id)}}"class="float-end btn btn-warning btn-sm"> Editar </a>
-      @endif
+          <div class="card-body">
+            <h5 class="card-title">{{date('d/m/y', strtotime($servico->created_at))}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{date('H:i', strtotime($servico->created_at))}}</h6>
+            <p class="card-text">Informações do agendamento:<br> </p>
+            @php $i=$loop->index @endphp
+              <b>Servicos prestados:</b><br>
+              @foreach($services as $service)
+                @if(isset($service[$i]))
+                  <p>{{ str_replace('_', ' ',ucfirst(substr($service[$i], 2, -4)))}}</p>
+                @endif
+              @endforeach
+              <p><b>Demanda não atendida:</b><br></p>
+              @if($servico->qual)<p>{{$servico->qual}}</p><p>@else - </p>@endif
+              @if($loop->first)
+            <a href="{{route('servico.show', $assistida->id)}}"class="float-end btn btn-warning btn-sm"> Editar </a>
+        @endif
+          </div>
         </div>
       </div>
-    </div>
-        <br>
+      <br>
     @endforeach
 @else
 <p>Assistida sem agendamentos</p>

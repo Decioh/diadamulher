@@ -62,7 +62,7 @@
                 @if($meses == 'nenhum agendamento no Ano selecionado')
                 <p style="font-weight:bold">Nenhum histórico no Ano de {{$ano}}</p>
                 @endif
-                <canvas id="myChart" width="700" height="350{{--175--}}"></canvas>
+                <canvas id="myChart" width="500" height="300"></canvas>
         </div>           
     </section> 
     <section class="graficos col 12 my-5">            

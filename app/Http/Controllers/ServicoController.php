@@ -181,7 +181,7 @@ class ServicoController extends Controller
             $sabin = Servico::whereYear('updated_at',$ano)->where('sabin', '=', '1')->count();
         }
 
-        $total=$defensoria+$cras+$codhab+$senac+$sesc_consulta+$sesc_sens+$sesc_mamografia+$sesc_odonto+$sesc_insercao_diu+$sesc_citopatologico+$sesc_enfermagem+$secretaria_da_mulher+$sec_saude+$sejus_subav+$delegacia_da_mulher+$fiocruz+$nupemec+$pmdf+$seped;
+        $total=$defensoria+$cras+$codhab+$senac+$sesc_consulta+$sesc_sens+$sesc_mamografia+$sesc_odonto+$sesc_insercao_diu+$sesc_citopatologico+$sesc_enfermagem+$secretaria_da_mulher+$sec_saude+$sejus_subav+$delegacia_da_mulher+$fiocruz+$nupemec+$pmdf+$seped+$sabin+$sedet;
 
 
     return view('dashboard/estatisticas',['servicos_mes'=>$servicos_mes, 'month'=>$month, 'selected_month'=>$selected_month,'ano'=>$ano,'meses'=>$meses,'total'=>$total,'tot_p_mes'=>$tot_p_mes ,'assistidas'=>$assistidas,

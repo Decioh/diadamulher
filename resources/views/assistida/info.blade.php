@@ -33,25 +33,24 @@ $i=0;
       Deletar
     </a>
 </p>
-
-
+@php $continue=0 @endphp
 <h2>Atendimentos </h2>
-
 @if(count($servicos)>0)    
     @foreach( $servicos as $servico )
-    @dump($servico)
       <div class="card mx-auto mb-5" style="width: 40rem;">
         <div class="row d-flex justify-content-center">
           <div class="card-body">
             <h5 class="card-title">{{date('d/m/y', strtotime($servico->created_at))}}</h5>
             <h6 class="card-subtitle mb-2 text-muted">{{date('H:i', strtotime($servico->created_at))}}</h6>
             <p class="card-text">Informações do agendamento:<br> </p>
-            @php $i=$loop->index @endphp
               <b>Servicos prestados:</b><br>
               @foreach($services as $service)
-                @if(isset($service[$i]))
-                  <p>{{ str_replace('_', ' ',ucfirst(substr($service[$i], 2, -4)))}}</p>
-                @endif
+              @if($service=='fim'){{--Fim é o separador de serviços e indica que estamos em um dia diferente--}}
+                @php array_shift($services); @endphp {{--Retira primeiro item da lista, para não repetir nas proxiams interações--}}
+                @break
+              @endif
+                <p>{{ $service }}</p>
+                @php array_shift($services); @endphp
               @endforeach
               <p><b>Demanda não atendida:</b><br></p>
               @if($servico->qual)<p>{{$servico->qual}}</p><p>@else - </p>@endif

@@ -8,7 +8,7 @@ O app foi feito em Laravel, e roda offline.
 ## Instalação
 - Crie um Banco com o nome diadamulher:
     - Tenha o xampp instalado;
-    - Acessse <a href="http://localhost/phpmyadmin/" target="_blank"> ;
+    - Acessse <a href="http://localhost/phpmyadmin/" target="_blank">Localhost</a> ;
     - Crie um novo DB;
     - Coloque o nome diadamulher;
 - Copie e configure o arquivo ENV, coloque o IP do computador ao invés de localhost:
